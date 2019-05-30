@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lf.demo.dao.StaffMapper">
+
+    <sql id="field_query">
+        id,user_name,password_hash,email,`name`,department_id,position_id,account_state,`identity`,memo,create_staff_id,
+        valid,create_time,update_time
+    </sql>
+
+
+    <!--根据ID获取员工-->
+    <select id="getStaffById" resultType="com.lf.demo.entity.SystemStaff">
+        select
+        <include refid="field_query"/>
+        from system_staff
+        where valid = #{valid} and id = #{id}
+    </select>
+
+</mapper>

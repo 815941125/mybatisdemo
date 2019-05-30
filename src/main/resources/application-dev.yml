@@ -1,0 +1,70 @@
+
+#mybatis配置
+mybatis:
+  type-aliases-package: com.lf.demo.entity
+  mapper-locations: classpath:mapper/*.xml
+
+#pagehelp物理分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+
+spring:
+  mvc:
+    # 未找到页面, 直接抛出异常
+    throw-exception-if-no-handler-found: true
+  resources:
+    # 不要为我们工程中的资源文件建立映射
+    add-mappings: false
+  # 数据源配置 项目配置做了隐身
+  datasource:
+    druid:
+      url: jdbc:mysql://ip/name?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      username:
+      password: 
+      driver-class-name: com.mysql.jdbc.Driver
+      # 初始化大小，最小，最大
+      initial-size: 5
+      max-active: 10
+      min-idle: 5
+      # 配置获取连接等待超时的时间
+      max-wait: 6000
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico
+        session-stat-enable: true
+        session-stat-max-count: 1000
+        profile-enable: true
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: true
+        login-username: druid
+        login-password: druid
+        allow: 127.0.0.1
+      filter:
+        # 配置StatFilter
+        stat:
+          db-type: mysql
+          # 输出 SQL
+          log-slow-sql: true
+          slow-sql-millis: 2000
+        # 配置WallFilter
+        wall:
+          db-type: mysql
+          enabled: true
+          config:
+            delete-allow: false
+            drop-table-allow: false
+            multiStatementAllow: true
+
+
+
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
